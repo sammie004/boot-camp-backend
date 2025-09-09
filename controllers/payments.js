@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 })
 
 const InitializePayment = async (req, res) => {
-    const { email, amount } = req.body; // ✅ Fixed
+    const { email, amount } = req.body
     const params = {
         email: email,
         amount: amount * 100
@@ -35,7 +35,7 @@ const InitializePayment = async (req, res) => {
         });
         const data = await response.json();
 
-        if (!data.status) { // ✅ Paystack uses `status`
+        if (!data.status) { 
             return res.status(400).json({ message: data.message });
         }
     const mailOptions = {
@@ -101,7 +101,7 @@ const VerifyPayment = async (req, res) => {
 
         let mailOptions = {
     from: `"Payment System" <${process.env.EMAIL_USER}>`,
-    to: "owner@example.com", // Change to actual business email
+    to: "owner@example.com", // clients email goes here
     subject: "New Payment Received",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
